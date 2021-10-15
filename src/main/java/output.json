@@ -1,1 +1,28 @@
-{"result":[{"rating":14,"disabled":false,"user":"greg@mail.com"},{"rating":20,"disabled":false,"user":"mike@mail.com"}]}
+{
+  "result": [
+    {
+      "sex": true,
+      "name": "Alex",
+      "email": "alex@mail.com",
+      "age": 13
+    },
+    {
+      "sex": false,
+      "name": "Jane",
+      "email": "jane@mail.com",
+      "age": 13
+    },
+    {
+      "sex": true,
+      "name": "John",
+      "email": "john1@mail.com",
+      "age": 13
+    },
+    {
+      "sex": true,
+      "name": "Vlad",
+      "email": "vlad@mail.com",
+      "age": 13
+    }
+  ]
+}

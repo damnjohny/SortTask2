@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ExcludeType {
+public class ExcludeType implements Comparator<String> {
 
     private static final List<JSONObject> jsonObjects = new ArrayList<>();
 
@@ -44,10 +44,9 @@ public class ExcludeType {
             }
 
             jsonObjects.sort(new Comparator<JSONObject>() {
-
                 @Override
                 public int compare(JSONObject jsonObject, JSONObject t1) {
-                    return Integer.parseInt(String.valueOf(jsonObject.get(sort_byObject))) - Integer.parseInt(String.valueOf(t1.get(sort_byObject)));
+                return jsonObject.get(sort_byObject).toString().compareTo(t1.get(sort_byObject).toString());
                 }
             });
 
@@ -61,5 +60,10 @@ public class ExcludeType {
         }
 
         return null;
+    }
+
+    @Override
+    public int compare(String s, String t1) {
+        return s.compareTo(t1);
     }
 }

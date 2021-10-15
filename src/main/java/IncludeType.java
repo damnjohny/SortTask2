@@ -5,15 +5,13 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 
-public class IncludeType {
+public class IncludeType implements Comparator<String> {
 
     private static final SortedMap<String, String> sortedMap = new TreeMap<>();
+    private static final List<JSONObject> jsonObjects = new ArrayList<>();
 
     public static JSONObject sortData() {
 
@@ -44,33 +42,25 @@ public class IncludeType {
             JSONArray data = (JSONArray) jsonObject.get("data");
 
             // берем каждое значение из массива json отдельно
-            String key = "";
-            String value = "";
             var iterator = data.iterator();
 
             while (iterator.hasNext()) {
-                JSONObject inerObj = (JSONObject) iterator.next();
-                key = (String) inerObj.get(includeKey); // John
-                value = (String) inerObj.get(sort_byKey); // john2@mail.com
+                JSONObject innerObj = (JSONObject) iterator.next();
 
-                if (key.equals(includeValue)) {
-                    sortedMap.put(value, key);
+                if (innerObj.get(includeKey).toString().equals(includeValue.toString())) {
+                    jsonObjects.add(innerObj);
                 }
             }
 
-            JSONArray resultArray = new JSONArray();
-
-            // из сортированого списка записываем обьекты в JSON массив
-            for (Map.Entry<String, String> next : sortedMap.entrySet()) {
-                JSONObject object = new JSONObject();
-                object.put(includeKey, next.getValue());
-                object.put(sort_byKey, next.getKey());
-                resultArray.add(object);
-            }
+            jsonObjects.sort(new Comparator<JSONObject>() {
+                @Override
+                public int compare(JSONObject jsonObject, JSONObject t1) {
+                    return jsonObject.get(sort_byKey).toString().compareTo(t1.get(sort_byKey).toString());
+                }
+            });
 
             JSONObject resultObject = new JSONObject();
-            resultObject.put("result", resultArray);
-            System.out.println(resultObject);
+            resultObject.put("result", jsonObjects);
 
             return resultObject;
         } catch (IOException | ParseException e) {
@@ -78,5 +68,10 @@ public class IncludeType {
         }
 
         return null;
+    }
+
+    @Override
+    public int compare(String s, String t1) {
+        return s.compareTo(t1);
     }
 }
