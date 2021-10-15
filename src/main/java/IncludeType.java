@@ -3,7 +3,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -26,7 +25,6 @@ public class IncludeType {
             var jsonObject = (JSONObject) jsonParser.parse(reader);
 
             JSONObject condition = (JSONObject) jsonObject.get("condition");
-            JSONArray exclude = (JSONArray) condition.get("exclude");
             JSONArray include = (JSONArray) condition.get("include");
             JSONArray sort_by = (JSONArray) condition.get("sort_by");
 

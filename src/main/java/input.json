@@ -1,26 +1,29 @@
 {
   "data": [
     {
-      "name": "John",
-      "email": "john2@mail.com"
+      "user": "mike@mail.com",
+      "rating": 20,
+      "disabled": false
     },
     {
-      "name": "John",
-      "email": "john1@mail.com"
+      "user": "greg@mail.com",
+      "rating": 14,
+      "disabled": false
     },
     {
-      "name": "Jane",
-      "email": "jane@mail.com"
+      "user": "john@mail.com",
+      "rating": 25,
+      "disabled": true
     }
   ],
   "condition": {
-    "include": [
+    "exclude": [
       {
-        "name": "John"
+        "disabled": true
       }
     ],
     "sort_by": [
-      "email"
+      "rating"
     ]
   }
 }
