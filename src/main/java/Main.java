@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            // считывание файла JSON
+            // считывание данных из входящего файла "input.json"
             FileReader reader = new FileReader(input);
 
             JSONParser jsonParser = new JSONParser();
@@ -26,10 +26,10 @@ public class Main {
             JSONObject condition = (JSONObject) jsonObject.get("condition");
             JSONArray exclude = (JSONArray) condition.get("exclude");
             JSONArray include = (JSONArray) condition.get("include");
-            JSONArray sort_by = (JSONArray) condition.get("sort_by");
 
             ObjectMapper objectMapper = new ObjectMapper();
 
+            // выполнение логики программы в зависимости от ключа с последующей записью результата в файл "output.json"
             if (exclude != null) {
                 objectMapper.writeValue(output, ExcludeType.sortData());
 

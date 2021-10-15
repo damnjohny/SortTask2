@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.io.JsonEOFException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,8 +23,8 @@ public class ExcludeType {
             JSONArray exclude = (JSONArray) condition.get("exclude");
             JSONArray sort_by = (JSONArray) condition.get("sort_by");
 
+            // получение ключа сортировки
             String sort_byObject = (String) sort_by.iterator().next();// "rating"
-            System.out.println(sort_byObject);
 
             JSONObject excludeObject = (JSONObject) exclude.get(0);
             String excludeKey = excludeObject.keySet().toString().replaceFirst("\\[", "")

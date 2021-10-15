@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+
 public class IncludeType {
 
     private static final SortedMap<String, String> sortedMap = new TreeMap<>();
-
 
     public static JSONObject sortData() {
 
@@ -40,25 +40,24 @@ public class IncludeType {
             // получение ключа сортировки
             String sort_byKey = (String) sort_by.get(0); // email
 
-
             // получение массива
             JSONArray data = (JSONArray) jsonObject.get("data");
 
             // берем каждое значение из массива json отдельно
-            Iterator dataIterator = data.iterator();
-
             String key = "";
             String value = "";
-            while (dataIterator.hasNext()) {
-                JSONObject inerObj = (JSONObject) dataIterator.next();
+            var iterator = data.iterator();
+
+            while (iterator.hasNext()) {
+                JSONObject inerObj = (JSONObject) iterator.next();
                 key = (String) inerObj.get(includeKey); // John
                 value = (String) inerObj.get(sort_byKey); // john2@mail.com
 
                 if (key.equals(includeValue)) {
                     sortedMap.put(value, key);
-
                 }
             }
+
             JSONArray resultArray = new JSONArray();
 
             // из сортированого списка записываем обьекты в JSON массив
@@ -73,6 +72,7 @@ public class IncludeType {
             resultObject.put("result", resultArray);
             System.out.println(resultObject);
 
+            return resultObject;
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
